@@ -155,6 +155,117 @@ public class Assignment {
         }
     }
 
+        public static void CityManagement(String[] cityname) {
+        Scanner sc = new Scanner(System.in);
+        for(int i=0;i<count;i++){
+            System.out.println((i+1)+":"+cityname[i]);
+            }
+        System.out.println();
+        
+        boolean result=true;
+        System.out.println("---------------------------------------");  
+        while(result){ 
+         System.out.println("1:Add a new city");
+         System.out.println("2:Remove city");
+         System.out.println("3:Rename city");
+         System.out.println("4:Exsit");
+         System.out.print("Enter your choice: ");
+         int choice=sc.nextInt();
+         System.out.println("---------------------------------------");
+         System.out.println("");
+         switch(choice){
+            case 1 -> {
+                addcity(cityname);
+                System.out.println("---------------------------------------");
+                }
+            case 2 -> {                
+                removecity(cityname);
+                System.out.println("---------------------------------------");
+                }
+            case 3 -> {
+                renamecity(cityname);
+                System.out.println("---------------------------------------");
+                }
+            case 4 -> {
+                System.out.println("Exsit.....");
+                result=false;
+                System.out.println("---------------------------------------");
+                }
+             default -> {
+                 System.out.println("invalid number ....try again...");
+                 System.out.println("---------------------------------------");
+                }       
+         }
+         
+         
+        }
+        
+    }
+    public static void addcity(String[] cityname) {
+        Scanner sc = new Scanner(System.in);
+        if (count >= MAX_CITIES) { System.out.println("Max cities reached."); return; }
+        
+        System.out.print("Enter new City name:");                 
+        String newcityname=sc.next();
+        
+        boolean itsnew=true;
+        for(int i=0;i<cityname.length;i++){
+                     
+            if(newcityname.equals(cityname[i])){
+                itsnew=false;                        
+                }                    
+        }
+        
+        if(itsnew){
+            System.out.println("*******");
+            cityname[count]=newcityname;
+            count=1+count;         
+            System.out.println("Success"); 
+             System.out.println("");
+            for(int i=0;i<count;i++){
+            System.out.println((i+1)+":"+cityname[i]);
+            }
+        }
+        else{                    
+            System.out.println(newcityname+" is already there");                    
+        }
+          
+        
+    }
+    public static void removecity(String[] cityname) {
+        Scanner sc = new Scanner(System.in);
+        
+        for(int i=0;i<count;i++){
+            System.out.println((i+1)+":"+cityname[i]);
+        }
+        
+        System.out.print("which you need to remove a city number : ");
+        int removenumber=sc.nextInt();
+        System.out.println(cityname[removenumber-1]+" is removed");
+        cityname[removenumber-1]=null;
+        
+        for(int i=removenumber;i<=count-1;i++){
+            cityname[i-1]=cityname[i];    
+                }
+        
+        cityname[count-1]=null;
+        count=count-1;  
+        
+        
+    }
+    public static void renamecity(String[] cityname) {
+        Scanner sc = new Scanner(System.in);
+        for(int i=0;i<count;i++){
+            System.out.println((i+1)+":"+cityname[i]);
+        }
+        System.out.print("which you need to rename a city number : ");
+        int renamenumber=sc.nextInt();
+        System.out.println("old name : "+cityname[renamenumber-1]);
+        System.out.print("new name : ");
+        cityname[renamenumber-1]=sc.next();
+        System.out.println("Success");
+    }
+
 
   }
     
