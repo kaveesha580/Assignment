@@ -486,6 +486,14 @@ public class Assignment {
         allcost[recordscount][0]=cost;
          System.out.println("Base Cost: "+(distance[(int)delivaryrequest[recordscount][0]-1][(int)delivaryrequest[recordscount][1]-1])+" X "+(vehicle[(int)delivaryrequest[recordscount][2]-1][1])+" X (1+"+(delivaryrequest[recordscount][3])+"/10000) = "+cost+" LKR");
     }
+    private static void Fuelused(double[][] delivaryrequest,double[][] distance,int[][] vehicle){
+        double fuelused=(distance[(int)delivaryrequest[recordscount][0]-1][(int)delivaryrequest[recordscount][1]-1])/vehicle[(int)delivaryrequest[recordscount][2]-1][3];
+        allcost[recordscount][1]=fuelused;
+        System.out.println("Fuelused: "+fuelused+" L");
+        double fuelcost=fuelused*fuelprice;
+        allcost[recordscount][2]=fuelcost;
+        System.out.println("Fuelcost: "+fuelcost+" LKR");
+    } 
 
   }
     
