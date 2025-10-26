@@ -266,7 +266,7 @@ public class Assignment {
         System.out.println("Success");
     }
 
-        private static void DistanceManagement(double[][] distance, String[] cityname) {
+    private static void DistanceManagement(double[][] distance, String[] cityname) {
         
         Scanner sc = new Scanner(System.in);
         boolean result=true;
@@ -344,6 +344,24 @@ public class Assignment {
             }
             System.out.println("");  
         }
+    }
+
+    private static void VehicleManagement(int[][] vehicle,String []vehicletype) {
+    String []tabelhead={"Type","Capacity(Km)","Rate per km (LKR)","Avg Speed (km/h)","Fuel Efficiency (km/l)"};
+    
+    for(int i=0;i<5;i++){
+            System.out.print(tabelhead[i]+"\t");   
+        }
+    System.out.println("");
+    for(int i=0;i<3;i++){
+            System.out.print(vehicletype[i]+"\t"); 
+            for(int j=0;j<4;j++){
+              System.out.print(vehicle[i][j]+"               "+"\t");  
+            }
+            System.out.println("");
+        }
+    
+      System.out.println("");System.out.println("");  
     }
 
  
