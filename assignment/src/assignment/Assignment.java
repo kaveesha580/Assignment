@@ -545,6 +545,64 @@ public class Assignment {
         System.out.println("");
     }
 
+    private static void minimumparth(double[][] distance, String[] cityname,double[][] delivaryrequest) {
+   
+    int source = (int) (delivaryrequest[recordscount][0]-1);
+
+    
+    int destination = (int) (delivaryrequest[recordscount][1]-1);
+
+    int n = count;
+    double[] dist = new double[n];
+    boolean[] visited = new boolean[n];
+    int[] prev = new int[n];
+
+    // Initialize
+    for (int i = 0; i < n; i++) {
+        dist[i] = Double.MAX_VALUE / 2;
+        prev[i] = -1;
+        visited[i] = false;
+    }
+    dist[source] = 0;
+
+    // Dijkstra algorithm
+    for (int i = 0; i < n - 1; i++) {
+        // Find the unvisited node with the smallest distance
+        double min = Double.MAX_VALUE;
+        int u = -1;
+        for (int j = 0; j < n; j++) {
+            if (!visited[j] && dist[j] < min) {
+                min = dist[j];
+                u = j;
+            }
+        }
+
+        if (u == -1) break;
+        visited[u] = true;
+
+        // Update distances
+        for (int v = 0; v < n; v++) {
+            if (!visited[v] && distance[u][v] > 0 && dist[u] + distance[u][v] < dist[v]) {
+                dist[v] = dist[u] + distance[u][v];
+                prev[v] = u;
+            }
+        }
+    }
+
+    // Reconstruct the path
+    if (dist[destination] == Double.MAX_VALUE / 2) {
+        System.out.println("No path exists between these two cities.");
+        return;
+    }
+
+  
+    delivaryrequest[recordscount][4]=(int) dist[destination];
+    System.out.println("Minimum Distance: " + dist[destination] + " km");
+
+   
+    System.out.println("---------------------------------------");
+}
+
   }
     
 
