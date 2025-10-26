@@ -21,6 +21,12 @@ public class Assignment {
     static double[][] allcost = new double[50][6];
     static String ROUTE_FILE = "routes.txt";
     static String DELIVERY_FILE = "deliveries.txt";
+    
+    static double totaltime = 0;
+    static double totalprofit = 0;
+    static double totalditance = 0;    
+    
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String[] cityname = new String[MAX_CITIES];
@@ -498,6 +504,45 @@ public class Assignment {
         allcost[recordscount][5]=(distance[(int)delivaryrequest[recordscount][0]-1][(int)delivaryrequest[recordscount][1]-1])/vehicle[(int)delivaryrequest[recordscount][2]-1][2];
         delivaryrequest[recordscount][5]=allcost[recordscount][5];
         System.out.println("Estimated Time: "+allcost[recordscount][5]+" hours");
+    }
+
+    private static void reports(double[][] distance, double[][] delivaryrequest) {
+         System.out.println("************************");
+         double LongestRoutes=0;
+         double ShortestRoutes=0;
+        for(int i=0;i<=recordscount;i++){
+            totaltime=totaltime+delivaryrequest[i][5];
+            totalprofit=totalprofit+delivaryrequest[i][7];
+             totalditance=totalditance+delivaryrequest[i][4];
+           
+        }
+        System.out.println("Total Deliveries Completed :"+recordscount);
+        System.out.println("Total Distance Covered : "+totalditance+" KM");
+        
+        System.out.println(" Average Delivery Time : "+totaltime/(double)recordscount);
+        System.out.println("Total Revenue and Profit : "+totalprofit+" LKR");
+        
+        for(int i=0;i<recordscount;i++){
+             
+            if(LongestRoutes<=delivaryrequest[i][4]){             
+                LongestRoutes=delivaryrequest[i][4];
+            }
+        }
+        ShortestRoutes=LongestRoutes;
+         for(int j=0;j<recordscount;j++){
+          
+            if(ShortestRoutes>delivaryrequest[j][4]){
+                ShortestRoutes=delivaryrequest[j][4];
+            }
+            
+            
+            
+        }
+        
+        
+        System.out.println("Longest Routes: "+LongestRoutes+" Km");
+        System.out.println("Shortest Routes: "+ShortestRoutes+"Km");
+        System.out.println("");
     }
 
   }
