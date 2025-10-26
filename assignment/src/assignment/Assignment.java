@@ -11,31 +11,35 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
 public class Assignment {
-     static int count = 5;
+    static int count = 5;
     static int dcount = 4;
-     static int recordscount = 0;
+    static int MAX_CITIES = 30;
+    static int recordscount = 0;
     static double fuelprice = 310;
     static double profitprecentage = 0.25;
 
-    static int MAX_CITIES = 30;
-    static double[][] allcost = new double[50][6];
-    static String ROUTE_FILE = "routes.txt";
-    static String DELIVERY_FILE = "deliveries.txt";
-    
     static double totaltime = 0;
     static double totalprofit = 0;
-    static double totalditance = 0;    
-    
-    
+    static double totalditance = 0;
+
+    static double[][] allcost = new double[50][6];
+
+    static String ROUTE_FILE = "routes.txt";
+    static String DELIVERY_FILE = "deliveries.txt";
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         String[] cityname = new String[MAX_CITIES];
         double[][] distance = new double[MAX_CITIES][MAX_CITIES];
         int[][] vehicle = {{1000, 30, 60, 12}, {5000, 40, 50, 6}, {10000, 80, 45, 4}};
         double [][] delivaryrequest = new double [50][9];
         String[] vehicletype = {"Van", "Truck", "Lorry"};
-        
         boolean result = true;
+        Scanner sc = new Scanner(System.in);
+
+        // Load data from files if they exist
+        loadRoutes(cityname, distance);
+        loadDeliveries(delivaryrequest);
+
         System.out.println("======================================================");
         System.out.println("       Menu-driven logistics management system");
         System.out.println("======================================================");
@@ -70,6 +74,9 @@ public class Assignment {
             }
         }
     }
+
+   
+
     private static void loadRoutes(String[] cityname, double[][] distance) {
         try {
             File f = new File(ROUTE_FILE);
@@ -161,7 +168,11 @@ public class Assignment {
         }
     }
 
-        public static void CityManagement(String[] cityname) {
+          
+        
+       
+     
+    public static void CityManagement(String[] cityname) {
         Scanner sc = new Scanner(System.in);
         for(int i=0;i<count;i++){
             System.out.println((i+1)+":"+cityname[i]);
@@ -370,7 +381,9 @@ public class Assignment {
       System.out.println("");System.out.println("");  
     }
 
-     private static void Delivaryrequest(double[][] delivaryrequest,String []cityname,int[][] vehicle,double [][]distance,String []vehicletype) {
+    
+
+    private static void Delivaryrequest(double[][] delivaryrequest,String []cityname,int[][] vehicle,double [][]distance,String []vehicletype) {
         boolean result=true;
         if(recordscount<50){
             
@@ -623,7 +636,9 @@ public class Assignment {
         System.out.println("");
         System.out.println("---------------------------------------");
     }
-
-  }
     
+    
+    
+   
 
+}
