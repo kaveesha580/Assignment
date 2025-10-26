@@ -11,9 +11,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
 public class Assignment {
+     static int count = 5;
+    static int dcount = 4;
+     static int recordscount = 0;
+    static double fuelprice = 310;
+    static double profitprecentage = 0.25;
 
     static int MAX_CITIES = 30;
     static double[][] allcost = new double[50][6];
+    static String ROUTE_FILE = "routes.txt";
+    static String DELIVERY_FILE = "deliveries.txt";
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String[] cityname = new String[MAX_CITIES];
@@ -57,7 +64,98 @@ public class Assignment {
             }
         }
     }
+    private static void loadRoutes(String[] cityname, double[][] distance) {
+        try {
+            File f = new File(ROUTE_FILE);
+            if (!f.exists()) {
+                System.out.println("No route file found, loading default data...");
+                cityname[0] = "colombo";
+                cityname[1] = "gampaha";
+                cityname[2] = "galle";
+                cityname[3] = "kandy";
+                cityname[4] = "ja-ela";
+                distance[0][1] = distance[1][0] = 36;
+                distance[0][2] = distance[2][0] = 130;
+                distance[0][3] = distance[3][0] = 122;
+                distance[0][4] = distance[4][0] = 25;
+                return;
+            }
 
+            BufferedReader br = new BufferedReader(new FileReader(f));
+            count = Integer.parseInt(br.readLine().trim());
+            for (int i = 0; i < count; i++) {
+                cityname[i] = br.readLine().trim();
+            }
+            for (int i = 0; i < count; i++) {
+                String[] line = br.readLine().trim().split(",");
+                for (int j = 0; j < count; j++) {
+                    distance[i][j] = Double.parseDouble(line[j]);
+                }
+            }
+            br.close();
+            System.out.println("Routes loaded successfully from " + ROUTE_FILE);
+        } catch (Exception e) {
+            System.out.println("Error loading routes: " + e.getMessage());
+        }
     }
+
+    private static void saveRoutes(String[] cityname, double[][] distance) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(ROUTE_FILE));
+            bw.write(count + "\n");
+            for (int i = 0; i < count; i++) {
+                bw.write(cityname[i] + "\n");
+            }
+            for (int i = 0; i < count; i++) {
+                for (int j = 0; j < count; j++) {
+                    bw.write(distance[i][j] + (j == count - 1 ? "" : ","));
+                }
+                bw.newLine();
+            }
+            bw.close();
+            System.out.println("Routes saved successfully to " + ROUTE_FILE);
+        } catch (Exception e) {
+            System.out.println("Error saving routes: " + e.getMessage());
+        }
+    }
+
+    private static void loadDeliveries(double[][] delivaryrequest) {
+        try {
+            File f = new File(DELIVERY_FILE);
+            if (!f.exists()) return;
+            BufferedReader br = new BufferedReader(new FileReader(f));
+            recordscount = Integer.parseInt(br.readLine().trim());
+            for (int i = 0; i < recordscount; i++) {
+                String[] parts = br.readLine().split(",");
+                for (int j = 0; j < 8; j++) {
+                    delivaryrequest[i][j] = Double.parseDouble(parts[j]);
+                }
+            }
+            br.close();
+            System.out.println("Deliveries loaded successfully from " + DELIVERY_FILE);
+        } catch (Exception e) {
+            System.out.println("Error loading deliveries: " + e.getMessage());
+        }
+    }
+
+    private static void saveDeliveries(double[][] delivaryrequest, double[][] allcost) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(DELIVERY_FILE));
+            bw.write(recordscount + "\n");
+            for (int i = 0; i < recordscount; i++) {
+                for (int j = 0; j < 8; j++) {
+                    bw.write(delivaryrequest[i][j] + (j == 7 ? "" : ","));
+                }
+                bw.newLine();
+            }
+            bw.close();
+            System.out.println("Deliveries saved successfully to " + DELIVERY_FILE);
+        } catch (Exception e) {
+            System.out.println("Error saving deliveries: " + e.getMessage());
+        }
+    }
+
+
+  }
     
 
