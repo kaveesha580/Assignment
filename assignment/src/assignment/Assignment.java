@@ -494,6 +494,11 @@ public class Assignment {
         allcost[recordscount][2]=fuelcost;
         System.out.println("Fuelcost: "+fuelcost+" LKR");
     } 
+    private static void Time(double[][] delivaryrequest, double[][] distance, int[][] vehicle) {
+        allcost[recordscount][5]=(distance[(int)delivaryrequest[recordscount][0]-1][(int)delivaryrequest[recordscount][1]-1])/vehicle[(int)delivaryrequest[recordscount][2]-1][2];
+        delivaryrequest[recordscount][5]=allcost[recordscount][5];
+        System.out.println("Estimated Time: "+allcost[recordscount][5]+" hours");
+    }
 
   }
     
