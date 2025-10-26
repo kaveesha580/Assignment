@@ -603,6 +603,27 @@ public class Assignment {
     System.out.println("---------------------------------------");
 }
 
+    private static void DeliveryRecords(double[][] delivaryrequest, double[][] allcost, String[] cityname, String[] vehicletype) {
+            String []tabelhead={"count","From","   To","Distance(km)","vehicle type","Weight(KG)","Customer Charge(LKR)"};
+            for(int i=0;i<7;i++){
+                System.out.print(tabelhead[i]+"\t");   
+            }
+            System.out.println("");
+        for(int i=0;i<recordscount;i++){
+              System.out.print((i+1)+"\t");
+              for(int j=0;j<2;j++){
+                 System.out.print(cityname[(int)delivaryrequest[i][j]-1]+""+"\t");
+              }
+            System.out.print("  "+delivaryrequest[i][4]+"\t\t"); 
+            System.out.print(vehicletype[(int)delivaryrequest[i][2]-1]+"\t\t");
+            System.out.print(delivaryrequest[i][3]+"\t\t");
+            System.out.print(delivaryrequest[i][6]+"\t");
+            System.out.println("");
+        }
+        System.out.println("");
+        System.out.println("---------------------------------------");
+    }
+
   }
     
 
