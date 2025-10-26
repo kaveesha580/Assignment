@@ -364,7 +364,124 @@ public class Assignment {
       System.out.println("");System.out.println("");  
     }
 
- 
+     private static void Delivaryrequest(double[][] delivaryrequest,String []cityname,int[][] vehicle,double [][]distance,String []vehicletype) {
+        boolean result=true;
+        if(recordscount<50){
+            
+            Scanner sc = new Scanner(System.in);
+        
+            for(int i=0;i<count;i++){
+                System.out.println((i+1)+":"+cityname[i]);
+            }
+        
+            System.out.print("Enter source city index :\t");
+            delivaryrequest[recordscount][0]=sc.nextInt();
+            System.out.println("");
+        
+            while(result){
+                System.out.print("Enter Destination city index :\t ");
+                delivaryrequest[recordscount][1]=sc.nextInt();
+                if ( delivaryrequest[recordscount][1]>count){
+                    System.out.println("it is not valid");  
+                }
+                else{                   
+                     if (distance[(int)delivaryrequest[recordscount][0]-1][(int)delivaryrequest[recordscount][1]-1] ==0 ){
+                        System.out.println("Distance is null");
+                       
+                    }
+                    else{
+                        if (delivaryrequest[recordscount][0]==delivaryrequest[recordscount][1]){
+                        System.out.println("it is not valid");
+                       
+                    }
+                    else{
+                        result=false;
+                    } 
+                    } 
+                }
+                
+            }
+            result=true;
+            while(result){
+                System.out.println("");System.out.println("");        
+                System.out.println("1.Van");
+                System.out.println("2.Truck");
+                System.out.println("3.Lory");        
+                System.out.print("Enter Vehicle type :\t");
+                delivaryrequest[recordscount][2]=sc.nextInt();
+            
+                if(delivaryrequest[recordscount][2]<4 && delivaryrequest[recordscount][2]>0){
+                    System.out.println("capacity: "+vehicle[(int)delivaryrequest[recordscount][2]-1][0]+"kg");
+                    result=false;   
+                }
+                else{
+                    System.out.println("it is not valid"); 
+                }
+            }
+            result=true;
+            while(result){
+                System.out.print("Enter Weight (in kg) :\t");
+                delivaryrequest[recordscount][3]=sc.nextInt();
+                if(vehicle[(int)delivaryrequest[recordscount][2]-1][0]>delivaryrequest[recordscount][3]){
+                    result=false;
+                }
+                else{
+                    System.out.println("maxsimum weight is "+vehicle[(int)delivaryrequest[recordscount][2]-1][0]+"kg"); 
+                    System.out.println("it is not valid");
+                }
+            }
+        
+        
+        
+        
+        
+         System.out.println("====================================================== ");
+         System.out.println("DELIVERY COST ESTIMATION "); 
+         System.out.println("------------------------------------------------------");
+         System.out.println("From: "+cityname[(int)delivaryrequest[recordscount][0]-1]);
+         System.out.println("TO: "+cityname[(int)delivaryrequest[recordscount][1]-1]);
+         System.out.print("Minimum Distance: ");
+         minimumparth(distance,cityname,delivaryrequest);
+         
+         System.out.println("Vehicle: "+vehicletype[(int)delivaryrequest[recordscount][2]-1]);
+         System.out.println("Weight: "+delivaryrequest[recordscount][3]+"kg");
+         System.out.println("------------------------------------------------------ ");
+         System.out.println("");
+         
+         Basecost(vehicle,delivaryrequest,distance);
+         Fuelused(delivaryrequest,distance,vehicle);
+         
+         /*total cost*/
+         allcost[recordscount][3]=allcost[recordscount][0]+allcost[recordscount][2];
+         
+         
+         System.out.println("Operational Cost: "+allcost[recordscount][3]+"LKR");
+         
+         
+         /*profit*/
+         allcost[recordscount][4]=allcost[recordscount][0]*profitprecentage;
+         delivaryrequest[recordscount][6]= (allcost[recordscount][4])+(allcost[recordscount][3]);
+         
+         delivaryrequest[recordscount][7]=allcost[recordscount][4];
+         System.out.println("Profit: "+allcost[recordscount][4]+"LKR");
+         
+         System.out.println("Customer Charge: "+delivaryrequest[recordscount][6]+"LKR");
+         Time(delivaryrequest,distance,vehicle);
+         System.out.println("====================================================== ");
+         recordscount=recordscount+1; 
+         System.out.println("");
+         
+         System.out.println("recordscount : "+recordscount);
+         
+        }
+        else{
+             System.out.println("not capacity");
+        }
+        
+           
+       
+    }
+
   }
     
 
