@@ -266,7 +266,87 @@ public class Assignment {
         System.out.println("Success");
     }
 
+        private static void DistanceManagement(double[][] distance, String[] cityname) {
+        
+        Scanner sc = new Scanner(System.in);
+        boolean result=true;
+        System.out.println("---------------------------------------");  
+        while(result){ 
+         System.out.println("1:Display the distance table");   
+         System.out.println("2:Input or edit distances between two cities");
+         System.out.println("3:Exsit");
+         System.out.print("Enter your choice: ");
+         int choice=sc.nextInt();
+         System.out.println("---------------------------------------");
+         
+         
+         
+         
+         switch(choice){
+            case 1 -> {
+                displaydistances(distance,cityname);
+                 
+                System.out.println("---------------------------------------");
+                }
+            case 2 -> {                
+                Inputdistances(distance,cityname);
+                System.out.println("---------------------------------------");
+                }
+            
+            case 3 -> {
+                System.out.println("Exsit.....");
+                result=false;
+                System.out.println("---------------------------------------");
+                }
+             default -> {
+                 System.out.println("invalid number ....try again...");
+                 System.out.println("---------------------------------------");
+                }       
+         }
+         
+         
+        }
+        
+        
+    }    
+    private static void Inputdistances(double[][] distance,String[] cityname) {
+        Scanner sc = new Scanner(System.in);
+        for(int i=0;i<count;i++){
+            System.out.println((i+1)+":"+cityname[i]);
+            }
+        System.out.println();
+        System.out.println("-------Input Distances-------");
+        System.out.print("enter source city number : ");
+        int Source =sc.nextInt();
+        System.out.print("enter Destination city number : ");
+        int Destination=sc.nextInt();        
+        if(Source ==Destination){
+            System.out.println("Dictance froma city to itself must be 0");
+        }
+        else{
+        System.out.println();
+        System.out.print("Enter Distances between two cities(Km) : ");
+        distance[Source -1][Destination-1]=sc.nextInt();
+        distance[Destination-1][Source -1]=distance[Source -1][Destination-1];
+        }
+        
+    }
+    private static void displaydistances(double[][] distance, String[] cityname) {
+        System.out.print("\t");
+        for(int i=0;i<=count;i++){
+            System.out.print(cityname[i]+"\t");   
+        }
+        System.out.println("");        
+        for(int i=0;i<=count;i++){
+            System.out.print(cityname[i]+"\t");
+            for(int j=0;j<=count;j++){
+                System.out.print(distance[i][j]+"\t");
+            }
+            System.out.println("");  
+        }
+    }
 
+ 
   }
     
 
